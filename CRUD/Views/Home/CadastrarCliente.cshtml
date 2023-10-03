@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Cadastro de Cliente";
+}
+@model CaptaAvaliacao.ViewModel.CadastroCliente;
+<div class="container">
+    <form asp-controller="Home" asp-action="SalvarCliente" id="formCadastroCliente" method="post">
+        <div class="mb-3">
+            <label for="inputNome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="inputNome" asp-for="cliente.Nome" placeholder="Nome do cliente">
+        </div>
+        <div class="mb-3">
+            <label for="inputCPF" class="form-label">CPF</label>
+            <input type="text" class="form-control" id="inputCPF" asp-for="cliente.CPF" placeholder="CPF do cliente">
+        </div>
+        <div class="mb-3">
+            <label for="inputTipoCliente" class="form-label">Tipo de Cliente</label>
+            <select class="form-select" id="inputTipoCliente" asp-for="cliente.TipoCliente">
+                <option selected value="-1">Selecione uma opção</option>
+                @foreach (var tipoCliente in Model.tpCliente)
+                {
+                    <option value="@tipoCliente.Id">@tipoCliente.Descricao</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="inputSexo" class="form-label">Sexo</label>
+            <input type="text" class="form-control" id="inputSexo" asp-for="cliente.Sexo">
+        </div>
+        <div class="mb-3">
+            <label for="inputSituacaoCliente" class="form-label">Situação do Cliente</label>
+            <select class="form-select" id="inputSituacaoCliente" asp-for="cliente.SituacaoCliente">
+                <option selected value="-1">Selecione uma opção</option>
+                @foreach (var situacaoCliente in Model.situacaoClientes)
+                {
+                    <option value="@situacaoCliente.Id">@situacaoCliente.Descricao</option>
+                }
+            </select>
+        </div>
+        <div class="flex col-3">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary" role="button">Voltar</a>
+        </div>
+    </form>
+</div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="msgToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto" id="msgContent"></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>

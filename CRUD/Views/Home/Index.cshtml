@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model CaptaAvaliacao.ViewModel.IndexModel;
+<div class="container">
+    <div class="flex">
+        <div>
+            <h3>Clientes</h3>
+        </div>
+        <div>
+            <a asp-controller="Home" asp-action="CadastrarCliente" class="btn btn-primary btn-capta" role="button">
+                Cadastrar
+            </a>
+        </div>
+    </div>
+    <div style="margin-top:1pc;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Tipo</th>
+                    <th>Sexo</th>
+                    <th>Situacao</th>
+                    <th class="iconRow"></th>
+                    <th class="iconRow"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cliente in Model.Cliente.GetListCliente())
+                {
+                    <tr>
+                        <td>@cliente.Nome</td>
+                        <td>@cliente.CPF</td>
+                        <td>@cliente.TipoClienteDesc</td>
+                        <td>@cliente.Sexo</td>
+                        <td>@cliente.SituacaoClienteDesc</td>
+                        <td class="iconRow"><a asp-controller="Home" asp-action="CadastrarCliente" asp-route-id="@cliente.CPF"><img src="/images/8666806_edit_write_pen_icon.svg" /></a></td>
+                        <td class="iconRow"><a asp-controller="Home" asp-action="ExcluirCliente" asp-route-id="@cliente.CPF" onclick="ExcluirCliente()"><img src="/images/3844460_can_trash_icon.svg" /></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="msgToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto" id="msgContent">@Model.msgRetorno</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @if (!string.IsNullOrEmpty(Model.msgRetorno))
+    {
+        <script>
+            $(document).ready(ShowToast());
+        </script>
+    }
+}

@@ -1,0 +1,32 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+#msgToast, .btn-capta {
+    background-color: #f9aa4c;
+}
+.btn-capta:hover {
+    background-color: #f59829;
+}
+.iconRow img{
+    width: 20px;
+    height: 20px;
+}
